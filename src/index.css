@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: #020209;
+    color: #e2e8f0;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    /* Subtle tech grid */
+    background-image:
+      linear-gradient(rgba(0,200,255,0.016) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,255,0.016) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  ::-webkit-scrollbar       { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: #020209; }
+  ::-webkit-scrollbar-thumb { background: rgba(0,200,255,0.22); border-radius: 2px; }
+
+  /* ── Force dark background on ALL form inputs globally ──────────────
+     Browsers apply a white user-agent background to <input> and
+     <textarea> that overrides any Tailwind bg-white/* utility.
+     Using @layer base keeps specificity manageable. */
+  input, textarea, select {
+    background-color: #08081a !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  /* Fix Chrome/Edge autofill yellow flash */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #08081a inset !important;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.8) !important;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(0,200,255,0.45); }
+}
+
+@layer components {
+  /* Glassmorphism card */
+  .glass-card {
+    background: rgba(10, 10, 24, 0.68);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  /* Gradient text: cyan → purple */
+  .gradient-text {
+    background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Section layout helpers */
+  .section-padding { padding-top: 6rem; padding-bottom: 6rem; }
+
+  .section-label {
+    @apply flex items-center gap-3 mb-3;
+  }
+  .section-line { @apply w-6 h-px bg-cyan-400; }
+  .section-tag  { @apply text-xs text-cyan-400 font-mono tracking-widest uppercase; }
+
+  /* Glow utilities */
+  .glow-cyan   { box-shadow: 0 0 24px rgba(0,212,255,0.12), 0 0 48px rgba(0,212,255,0.04); }
+  .glow-purple { box-shadow: 0 0 24px rgba(139,92,246,0.12), 0 0 48px rgba(139,92,246,0.04); }
+
+  /* CNN scanline effect (used in ProfileImage) */
+  .scanline::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,0,0,0.04) 3px,
+      rgba(0,0,0,0.04) 4px
+    );
+    pointer-events: none;
+  }
+}
