@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX } from 'react-icons/fi'
+import { PERSONAL } from '../data/portfolioData'
 
 const NAV_LINKS = [
   { label: 'Home',       href: '#home' },
@@ -11,108 +12,100 @@ const NAV_LINKS = [
   { label: 'Contact',    href: '#contact' },
 ]
 
-export default function Navbar({ onCommandOpen }) {
-  const [scrolled,   setScrolled]   = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [activeLink, setActiveLink] = useState('#home')
+function Logo() {
+  const [imgFailed, setImgFailed] = useState(false)
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  if (!imgFailed) {
+    return (
+      <img
+        src="/logo.png"
+        alt="Logo"
+        onError={() => setImgFailed(true)}
+        className="w-16 h-16 sm:w-20 sm:h-20 object-contain flex-shrink-0"
+      />
+    )
+  }
+
+  // Fallback: styled "MM" initials badge
+  return (
+    <div
+      className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center flex-shrink-0 font-black text-white text-xl sm:text-2xl tracking-tight select-none"
+      style={{ background: 'linear-gradient(135deg, #06b6d4, #8b5cf6)' }}
+    >
+      MM
+    </div>
+  )
+}
+
+export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-      style={scrolled ? {
-        background: 'rgba(2,2,9,0.88)',
-        backdropFilter: 'blur(18px)',
-        WebkitBackdropFilter: 'blur(18px)',
-        borderBottom: '1px solid rgba(255,255,255,0.07)',
-      } : {}}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md"
+      style={{ boxShadow: '0 1px 0 #f3f4f6, 0 2px 12px rgba(0,0,0,0.05)' }}
     >
-      <div className="max-w-screen-2xl mx-auto px-6 sm:px-10 lg:px-16">
-        <div className="flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10">
+        {/* Desktop bar — h-20 mobile, h-24 desktop */}
+        <div className="flex items-center justify-between h-24 lg:h-28">
 
-          {/* ── Logo ─────────────────────────────────── */}
-          <a href="#home" className="flex items-center gap-3.5 group flex-shrink-0">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black text-white"
-              style={{
-                background: 'linear-gradient(135deg, #7c3aed, #0891b2)',
-                boxShadow: '0 0 18px rgba(0,180,255,0.28)',
-              }}
-            >
-              MM
+          {/* ── Logo + name ──────────────────────────────── */}
+          <a href="#home" className="flex items-center gap-3 sm:gap-4 group flex-shrink-0">
+            <Logo />
+            <div className="flex flex-col leading-tight">
+              <span className="text-base sm:text-xl font-bold text-gray-900 group-hover:text-cyan-600 transition-colors tracking-tight">
+                {PERSONAL.name}
+              </span>
+              <span className="hidden sm:block text-xs text-gray-400 font-medium mt-0.5">
+                AI Engineering Student
+              </span>
             </div>
-            <span className="font-semibold text-base text-white/70 group-hover:text-white transition-colors hidden sm:block">
-              Mouhcine Malek
-            </span>
           </a>
 
-          {/* ── Desktop nav ──────────────────────────── */}
-          <div className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map(({ label, href }) => {
-              const isActive = activeLink === href
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  onClick={() => setActiveLink(href)}
-                  className="relative px-4 py-2 rounded-lg text-[15px] font-medium transition-all"
-                  style={{ color: isActive ? '#fff' : 'rgba(255,255,255,0.48)' }}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-active"
-                      className="absolute inset-0 rounded-lg"
-                      style={{
-                        background: 'rgba(0,212,255,0.1)',
-                        border: '1px solid rgba(0,212,255,0.22)',
-                      }}
-                      transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
-                    />
-                  )}
-                  <span className="relative">{label}</span>
-                </a>
-              )
-            })}
+          {/* ── Desktop nav links ─────────────────────────── */}
+          <div className="hidden md:flex items-center gap-0.5">
+            {NAV_LINKS.map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                className="px-4 py-2.5 rounded-xl text-sm font-medium text-gray-500 hover:text-cyan-600 hover:bg-cyan-50 transition-all duration-150"
+              >
+                {label}
+              </a>
+            ))}
           </div>
 
-          {/* ── Mobile toggle only ───────────────────── */}
+          {/* ── Mobile toggle ─────────────────────────────── */}
           <button
-            className="md:hidden text-white/50 hover:text-white transition-colors p-2"
+            className="md:hidden text-gray-500 hover:text-gray-900 transition-colors p-2 rounded-lg hover:bg-gray-50"
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
           >
-            {mobileOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+            {mobileOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* ── Mobile menu ──────────────────────────────── */}
+      {/* ── Mobile menu ───────────────────────────────────── */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            style={{
-              background: 'rgba(2,2,9,0.96)',
-              borderTop: '1px solid rgba(255,255,255,0.07)',
-            }}
-            className="md:hidden overflow-hidden"
+            transition={{ duration: 0.22 }}
+            className="md:hidden overflow-hidden bg-white border-t border-gray-100"
           >
-            <div className="px-6 py-4 space-y-1">
+            <div className="px-6 py-4 space-y-0.5">
               {NAV_LINKS.map(({ label, href }) => (
                 <a
                   key={label}
                   href={href}
-                  className="block py-3 text-base text-white/55 hover:text-cyan-400 transition-colors"
-                  onClick={() => { setMobileOpen(false); setActiveLink(href) }}
+                  className="block px-3 py-3 rounded-xl text-base font-medium text-gray-600 hover:text-cyan-600 hover:bg-cyan-50 transition-all"
+                  onClick={() => setMobileOpen(false)}
                 >
                   {label}
                 </a>

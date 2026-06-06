@@ -4,7 +4,8 @@ export const PERSONAL = {
   role: 'AI Engineering Student',
   tagline: 'Agentic AI · Data Science · Machine Learning',
   bio: 'I build intelligent systems that connect data, models, and real-world applications.',
-  photo: '/photo.jpg',
+  photo: '/photo2.png',
+  logo: '/logo.png',
   cv: '/CVENG_MouhcineMalek.pdf',
   email: 'mhcnmalek@gmail.com',
   linkedin: 'https://linkedin.com/in/mouhcine-malek',
@@ -13,220 +14,244 @@ export const PERSONAL = {
   status: 'Available for PFA Internship',
 }
 
-// ─── CNN layer definitions ────────────────────────────────────────────────────
-// Each layer maps to a portfolio section.
-// maps/mapW/mapH control the feature-map stack visuals.
+// Hero badge pills
+export const HERO_BADGES = ['Agentic AI', 'Data Science', 'Machine Learning', 'Computer Vision']
+
+// ─── CNN journey layers ───────────────────────────────────────────────────────
+// `stage` maps to a visual block component inside CNNArchitecture.
 export const CNN_LAYERS = [
   {
     id: 'input',
-    type: 'Input',
+    type: 'Input Layer',
+    name: 'Identity',
     label: 'INPUT',
-    badge: 'Identity',
-    annotation: 'Profile Data',
-    color: '#00d4ff',
-    maps: 1,
-    mapW: 88,
-    mapH: 280,
-    isInput: true,
-    title: 'Who I Am',
+    layerNum: '01',
+    color: '#06b6d4',       // cyan
+    colorName: 'cyan',
+    stage: 'input',         // maps to InputStage visual
+    preview: 'Mouhcine Malek · AI Engineering Student',
     content: {
       type: 'profile',
-      description:
-        'Mouhcine Malek — AI Engineering student at ENIAD, passionate about intelligent systems, data science, and applied AI.',
-      facts: [
-        'Based in Morocco · Seeking PFA internship',
-        'Background in Business Intelligence & Data Science',
-        'Focus on end-to-end AI system development',
-        'Member — Nurl AI Student Club (HR Team)',
-      ],
+      description: 'Mouhcine Malek, AI Engineering student passionate about intelligent systems, data, and real-world AI applications.',
     },
   },
   {
     id: 'conv1',
-    type: 'Conv2D',
+    type: 'Conv Layer',
+    name: 'Education',
     label: 'CONV_1',
-    badge: 'Education',
-    annotation: 'Feature Extraction',
-    color: '#8b5cf6',
-    maps: 6,
-    mapW: 62,
-    mapH: 220,
-    title: 'Education',
+    layerNum: '02',
+    color: '#8b5cf6',       // purple
+    colorName: 'purple',
+    stage: 'conv',
+    preview: 'Engineering Cycle in AI · DUT in BI & Data Science',
     content: {
       type: 'education',
       items: [
-        {
-          degree: 'Engineering Cycle in Artificial Intelligence',
-          school: 'ENIAD',
-          location: 'Berkane, Morocco',
-          period: '2024 – Present',
-          status: 'current',
-          topics: ['Deep Learning', 'Computer Vision', 'NLP', 'Agentic AI', 'Data Engineering'],
-        },
-        {
-          degree: 'DUT — Business Intelligence & Data Science',
-          school: 'EST Essaouira',
-          location: 'Essaouira, Morocco',
-          period: '2022 – 2024',
-          status: 'completed',
-          topics: ['Data Analysis', 'SQL', 'Python', 'R', 'Power BI', 'Statistics'],
-        },
+        { degree: 'Engineering Cycle in Artificial Intelligence', school: 'ENIAD, Berkane', period: '2024 – Present', status: 'current' },
+        { degree: 'DUT in Business Intelligence and Data Science', school: 'EST Essaouira', period: '2022 – 2024', status: 'done' },
       ],
     },
   },
   {
     id: 'pool',
-    type: 'MaxPool2D',
-    label: 'MAX_POOL',
-    badge: 'Core Skills',
-    annotation: 'Pooling',
-    color: '#3b82f6',
-    maps: 3,
-    mapW: 54,
-    mapH: 172,
-    title: 'Technical Skills',
+    type: 'Pooling Layer',
+    name: 'Skills',
+    label: 'POOL',
+    layerNum: '03',
+    color: '#10b981',       // green
+    colorName: 'green',
+    stage: 'pooling',
+    preview: 'AI · Agentic · Programming · Frameworks · Tools',
     content: {
       type: 'skills',
       groups: [
-        {
-          name: 'Artificial Intelligence',
-          color: '#00d4ff',
-          skills: ['Machine Learning', 'Deep Learning', 'Computer Vision', 'NLP', 'LLM', 'RAG', 'Data Analysis'],
-        },
-        {
-          name: 'Agentic AI',
-          color: '#8b5cf6',
-          skills: ['LangChain', 'LangGraph', 'MCP', 'Multi-Agent Systems', 'Tool Use'],
-        },
-        {
-          name: 'Programming',
-          color: '#3b82f6',
-          skills: ['Python', 'JavaScript', 'Java', 'C', 'C++', 'R', 'PHP', 'SQL'],
-        },
-        {
-          name: 'Frameworks',
-          color: '#06b6d4',
-          skills: ['PyTorch', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'Pandas', 'NumPy', 'Django', 'React.js', 'FastAPI'],
-        },
-        {
-          name: 'Databases & Tools',
-          color: '#a855f7',
-          skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'SQLite', 'Power BI', 'Git', 'GitHub', 'UML', 'MERISE'],
-        },
+        { name: 'AI', skills: ['Machine Learning', 'Deep Learning', 'Computer Vision', 'NLP', 'LLM', 'RAG', 'Data Analysis'] },
+        { name: 'Agentic AI', skills: ['LangChain', 'LangGraph', 'MCP'] },
+        { name: 'Programming', skills: ['Python', 'Java', 'C', 'C++', 'R', 'JavaScript', 'PHP'] },
+        { name: 'Frameworks', skills: ['PyTorch', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'Pandas', 'NumPy', 'Django', 'React.js', 'FastAPI'] },
+        { name: 'Tools', skills: ['SQL', 'PostgreSQL', 'MongoDB', 'Power BI', 'Git', 'GitHub', 'UML', 'MERISE'] },
       ],
     },
   },
   {
     id: 'conv2',
-    type: 'Conv2D',
+    type: 'Conv Layer',
+    name: 'Projects',
     label: 'CONV_2',
-    badge: 'Projects',
-    annotation: 'Pattern Recognition',
-    color: '#06b6d4',
-    maps: 8,
-    mapW: 60,
-    mapH: 210,
-    title: 'Projects',
+    layerNum: '04',
+    color: '#f97316',       // orange
+    colorName: 'orange',
+    stage: 'conv',
+    preview: 'Alzheimer Detection · Multi-Agent · Data Platform · EV App',
     content: {
       type: 'projects',
       items: [
-        {
-          icon: '🧠',
-          title: "Alzheimer's Detection & Classification",
-          subtitle: 'Deep Learning · NLP · RAG · Medical AI',
-          description:
-            'Medical AI system combining brain MRI analysis, Deep Learning and NLP. PyTorch classification models + RAG pipeline with vector databases to generate contextual scientific answers.',
-          tags: ['Python', 'PyTorch', 'Deep Learning', 'NLP', 'RAG', 'Medical AI'],
-          accent: '#00d4ff',
-        },
-        {
-          icon: '🤖',
-          title: 'Clinical Orientation Multi-Agent Workflow',
-          subtitle: 'LangGraph · Agentic AI · FastAPI',
-          description:
-            'Multi-agent system with LangGraph and LangChain simulating clinical orientation. Agents for collection, synthesis, human validation and report generation. Integrated MCP, FastAPI and Streamlit.',
-          tags: ['LangGraph', 'LangChain', 'MCP', 'FastAPI', 'Streamlit'],
-          accent: '#8b5cf6',
-        },
-        {
-          icon: '📊',
-          title: 'Automated Data Analysis Platform',
-          subtitle: 'Django · Machine Learning',
-          description:
-            'Django platform for uploading datasets, running exploratory analysis, and automatically recommending suitable ML algorithms based on data characteristics.',
-          tags: ['Django', 'Machine Learning', 'Data Analysis', 'Python'],
-          accent: '#06b6d4',
-        },
-        {
-          icon: '⚡',
-          title: 'EV Charging Points Management App',
-          subtitle: 'Django · PostgreSQL · JavaScript',
-          description:
-            'Full-stack web app developed during POGO internship for managing EV charging infrastructure. Status monitoring, user management and administrative dashboard.',
-          tags: ['Django', 'PostgreSQL', 'JavaScript', 'HTML/CSS'],
-          accent: '#a855f7',
-        },
+        { title: "Alzheimer Disease Detection & Classification", tags: ['Deep Learning', 'NLP', 'RAG', 'Medical AI'] },
+        { title: "Clinical Orientation Multi-Agent Workflow", tags: ['LangGraph', 'LangChain', 'MCP', 'FastAPI'] },
+        { title: "Automated Data Analysis Web Application", tags: ['Django', 'Machine Learning', 'Python'] },
+        { title: "EV Charging Points Management App", tags: ['Django', 'PostgreSQL', 'JavaScript'] },
       ],
     },
   },
   {
     id: 'dense',
-    type: 'Dense',
-    label: 'FC_DENSE',
-    badge: 'Experience',
-    annotation: 'Decision Layer',
-    color: '#a855f7',
-    maps: 5,
-    isDense: true,
-    title: 'Experience',
+    type: 'Dense Layer',
+    name: 'Experience',
+    label: 'DENSE',
+    layerNum: '05',
+    color: '#ec4899',       // pink
+    colorName: 'pink',
+    stage: 'dense',
+    preview: 'Web Developer Intern · POGO · Agricultural Office',
     content: {
       type: 'experience',
       items: [
-        {
-          role: 'Web Developer Intern',
-          company: 'POGO',
-          location: 'Fès, Morocco',
-          period: 'April 2024 – May 2024',
-          description:
-            'Developed an EV charging points management web application. UI design, backend integration, and database architecture.',
-          tech: ['Django', 'PostgreSQL', 'JavaScript', 'HTML/CSS'],
-          accent: '#00d4ff',
-        },
-        {
-          role: 'Web Development Observation Internship',
-          company: 'ORMVAT',
-          location: 'Fquih Ben Salah, Morocco',
-          period: 'May 2023 – July 2023',
-          description:
-            'Followed the development of an agricultural product commercialization platform. Hands-on exposure to Django, Bootstrap and SQLite in a professional environment.',
-          tech: ['Django', 'Bootstrap', 'SQLite'],
-          accent: '#8b5cf6',
-        },
+        { role: 'Web Developer Intern', company: 'POGO', location: 'Fès', period: '2024', description: 'Full-stack web application development for EV charging infrastructure management.' },
+        { role: 'Web Development Observation', company: 'Office Régional de Mise en Valeur Agricole du Tadla', location: 'Morocco', period: '2023', description: 'Observation internship in web development within the agricultural sector.' },
       ],
     },
   },
   {
     id: 'output',
-    type: 'Output',
+    type: 'Output Layer',
+    name: 'Result',
     label: 'OUTPUT',
-    badge: 'Available!',
-    annotation: 'Result: AI Engineer',
-    color: '#10b981',
-    maps: 1,
-    isOutput: true,
-    title: 'Hire Me',
+    layerNum: '06',
+    color: '#06b6d4',       // cyan
+    colorName: 'cyan',
+    stage: 'output',
+    preview: 'Available for PFA Internship · Morocco',
     content: {
       type: 'output',
       status: 'Available for PFA Internship',
-      focus: ['AI / Data Science', 'Agentic Systems', 'Web Applications', 'Deep Learning'],
-      location: 'Morocco (on-site or remote)',
-      mode: 'Learning · Building · Deploying',
+      focus: ['AI', 'Data Science', 'Agentic AI', 'Web Applications'],
+      location: 'Beni Mellal, Morocco',
+      confidence: 98,
     },
   },
 ]
 
-// ─── Standalone section data (for detailed pages below fold) ─────────────────
-export const PROJECTS = CNN_LAYERS.find((l) => l.id === 'conv2').content.items
-export const SKILLS_GROUPS = CNN_LAYERS.find((l) => l.id === 'pool').content.groups
-export const EXPERIENCES = CNN_LAYERS.find((l) => l.id === 'dense').content.items
-export const EDUCATION_ITEMS = CNN_LAYERS.find((l) => l.id === 'conv1').content.items
+// ─── Projects section ─────────────────────────────────────────────────────────
+export const PROJECTS = [
+  {
+    title: "Alzheimer's Disease Detection & Classification",
+    subtitle: 'Deep Learning · NLP · RAG · Medical AI',
+    description:
+      'Medical AI system combining brain MRI analysis, Deep Learning and NLP. PyTorch classification models plus a RAG pipeline with vector databases to generate contextual scientific answers.',
+    tags: ['Python', 'PyTorch', 'Deep Learning', 'NLP', 'RAG', 'Medical AI'],
+    icon: 'activity',
+    accent: '#06b6d4',
+    featured: true,
+  },
+  {
+    title: 'Clinical Orientation Multi-Agent Workflow',
+    subtitle: 'LangGraph · Agentic AI · FastAPI · MCP',
+    description:
+      'Multi-agent system with LangGraph and LangChain simulating clinical orientation. Agents for collection, synthesis, human validation and report generation, integrated with MCP and FastAPI.',
+    tags: ['LangGraph', 'Agentic AI', 'FastAPI', 'MCP', 'LangChain'],
+    icon: 'layers',
+    accent: '#8b5cf6',
+    featured: true,
+  },
+  {
+    title: 'Automated Data Analysis Platform',
+    subtitle: 'Django · Machine Learning',
+    description:
+      'Django platform for uploading datasets, running exploratory analysis, and automatically recommending suitable ML algorithms based on data characteristics.',
+    tags: ['Django', 'Machine Learning', 'Data Analysis', 'Python'],
+    icon: 'barchart',
+    accent: '#06b6d4',
+    featured: false,
+  },
+  {
+    title: 'EV Charging Points Management App',
+    subtitle: 'Django · PostgreSQL · JavaScript',
+    description:
+      'Full-stack web app developed during the POGO internship for managing EV charging infrastructure. Status monitoring, user management and an administrative dashboard.',
+    tags: ['Django', 'PostgreSQL', 'JavaScript', 'HTML/CSS'],
+    icon: 'zap',
+    accent: '#8b5cf6',
+    featured: false,
+  },
+]
+
+// ─── Skills section ───────────────────────────────────────────────────────────
+export const SKILLS = [
+  {
+    name: 'Artificial Intelligence',
+    icon: 'cpu',
+    color: '#06b6d4',
+    skills: ['Machine Learning', 'Deep Learning', 'Computer Vision', 'NLP', 'LLM', 'RAG', 'Data Analysis'],
+  },
+  {
+    name: 'Agentic AI',
+    icon: 'zap',
+    color: '#8b5cf6',
+    skills: ['LangChain', 'LangGraph', 'MCP', 'Multi-Agent Systems', 'Tool Use'],
+  },
+  {
+    name: 'Programming',
+    icon: 'code',
+    color: '#10b981',
+    skills: ['Python', 'Java', 'C', 'C++', 'R', 'JavaScript', 'PHP', 'SQL'],
+  },
+  {
+    name: 'Frameworks',
+    icon: 'settings',
+    color: '#f97316',
+    skills: ['PyTorch', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'Pandas', 'NumPy', 'Django', 'React.js', 'FastAPI'],
+  },
+  {
+    name: 'Databases & Tools',
+    icon: 'database',
+    color: '#ec4899',
+    skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'SQLite', 'Power BI', 'Git', 'GitHub', 'UML', 'MERISE'],
+  },
+]
+
+// ─── Experience section ───────────────────────────────────────────────────────
+export const EXPERIENCE = [
+  {
+    role: 'Web Developer Intern',
+    company: 'POGO',
+    location: 'Fès, Morocco',
+    period: 'April 2024 – May 2024',
+    description:
+      'Developed an EV charging points management web application. Worked on UI design, backend integration, and database architecture.',
+    tech: ['Django', 'PostgreSQL', 'JavaScript', 'HTML/CSS'],
+    accent: '#06b6d4',
+  },
+  {
+    role: 'Web Development Observation Internship',
+    company: 'Office Régional de Mise en Valeur Agricole du Tadla',
+    location: 'Fquih Ben Salah, Morocco',
+    period: 'May 2023 – July 2023',
+    description:
+      'Followed the development of an agricultural product commercialization platform. Hands-on exposure to Django, Bootstrap and SQLite in a professional environment.',
+    tech: ['Django', 'Bootstrap', 'SQLite'],
+    accent: '#8b5cf6',
+  },
+]
+
+// ─── Education section ────────────────────────────────────────────────────────
+export const EDUCATION = [
+  {
+    degree: 'Engineering Cycle in Artificial Intelligence',
+    school: 'ENIAD',
+    location: 'Berkane, Morocco',
+    period: '2024 – Present',
+    status: 'current',
+    accent: '#8b5cf6',
+    topics: ['Deep Learning', 'Computer Vision', 'NLP', 'Agentic AI', 'Data Engineering'],
+  },
+  {
+    degree: 'DUT — Business Intelligence & Data Science',
+    school: 'EST Essaouira',
+    location: 'Essaouira, Morocco',
+    period: '2022 – 2024',
+    status: 'completed',
+    accent: '#06b6d4',
+    topics: ['Data Analysis', 'SQL', 'Python', 'R', 'Power BI', 'Statistics'],
+  },
+]

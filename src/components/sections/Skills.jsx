@@ -1,76 +1,75 @@
 import { useState, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { SKILLS_GROUPS } from '../../data/portfolioData'
+import { FiCpu, FiZap, FiCode, FiSettings, FiDatabase } from 'react-icons/fi'
+import { SKILLS } from '../../data/portfolioData'
+
+const ICON_MAP = { cpu: FiCpu, zap: FiZap, code: FiCode, settings: FiSettings, database: FiDatabase }
 
 export default function Skills() {
   const [active, setActive] = useState(0)
-  const ref    = useRef(null)
+  const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
-  const current = SKILLS_GROUPS[active]
+  const current = SKILLS[active]
 
   return (
-    <section id="skills" className="section-padding px-6 sm:px-10 lg:px-16" ref={ref}>
-      <div className="max-w-screen-2xl mx-auto">
+    <section id="skills" className="section-padding px-5 sm:px-8 bg-white" ref={ref}>
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="mb-14"
+          className="mb-12"
         >
-          <div className="section-label"><div className="section-line" /><span className="section-tag">02. Skills</span></div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">Technical Arsenal</h2>
-          <p className="text-white/35 mt-3 text-base">Select a category to explore.</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Technical Arsenal</h2>
+          <p className="text-gray-500 mt-3 text-base">Select a category to explore.</p>
         </motion.div>
 
-        {/* Category cards */}
+        {/* Category tabs */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.1 }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-6"
+          className="flex flex-wrap gap-2.5 mb-8"
         >
-          {SKILLS_GROUPS.map((g, i) => (
-            <button
-              key={g.name}
-              onClick={() => setActive(i)}
-              className="glass-card rounded-2xl p-5 border text-left transition-all"
-              style={{
-                borderColor: active === i ? `${g.color}40` : 'rgba(255,255,255,0.07)',
-                background:  active === i ? `${g.color}09` : undefined,
-              }}
-            >
-              <div className="font-mono text-[11px] font-bold tracking-widest mb-1.5"
-                   style={{ color: active === i ? g.color : `${g.color}66` }}>
-                {g.name.toUpperCase().split(' ')[0]}
-              </div>
-              <div className="text-sm font-medium text-white/65 leading-tight">{g.name}</div>
-              <div className="text-[10px] text-white/25 font-mono mt-1.5">{g.skills.length} skills</div>
-            </button>
-          ))}
+          {SKILLS.map((cat, i) => {
+            const Icon = ICON_MAP[cat.icon] || FiCpu
+            const isActive = active === i
+            return (
+              <button
+                key={cat.name}
+                onClick={() => setActive(i)}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all border"
+                style={
+                  isActive
+                    ? { backgroundColor: cat.color, borderColor: cat.color, color: '#fff' }
+                    : { backgroundColor: '#fff', borderColor: '#e5e7eb', color: '#4b5563' }
+                }
+              >
+                <Icon className="w-4 h-4" style={isActive ? {} : { color: cat.color }} />
+                {cat.name}
+              </button>
+            )
+          })}
         </motion.div>
 
-        {/* Skills pills */}
+        {/* Skill chips */}
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.18 }}
-            className="glass-card rounded-2xl p-8 border border-white/7"
+            transition={{ duration: 0.2 }}
+            className="bg-[#f9fafb] rounded-3xl p-8"
           >
             <div className="flex flex-wrap gap-3">
               {current.skills.map((skill, i) => (
                 <motion.span
                   key={skill}
-                  initial={{ opacity: 0, scale: 0.85 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: i * 0.03 }}
-                  className="px-4 py-2 rounded-xl border text-sm font-medium cursor-default"
-                  style={{
-                    borderColor: `${current.color}28`,
-                    color:       `${current.color}cc`,
-                    background:  `${current.color}09`,
-                  }}
+                  className="px-4 py-2 rounded-full text-sm font-medium"
+                  style={{ backgroundColor: `${current.color}14`, color: current.color }}
                 >
                   {skill}
                 </motion.span>

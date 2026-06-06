@@ -1,40 +1,48 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { FiActivity, FiLayers, FiBarChart2, FiZap } from 'react-icons/fi'
 import { PROJECTS } from '../../data/portfolioData'
 
+const ICON_MAP = { activity: FiActivity, layers: FiLayers, barchart: FiBarChart2, zap: FiZap }
+
 function ProjectCard({ p, index, inView }) {
+  const Icon = ICON_MAP[p.icon] || FiActivity
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.1, duration: 0.5 }}
-      className="glass-card rounded-2xl p-7 border border-white/7 hover:border-white/14 transition-all duration-300 group flex flex-col"
+      className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-7 flex flex-col"
     >
       <div className="flex items-start justify-between mb-5">
-        <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
-             style={{ background: `${p.accent}12` }}>
-          {p.icon}
+        <div
+          className="w-12 h-12 rounded-2xl flex items-center justify-center"
+          style={{ backgroundColor: `${p.accent}14` }}
+        >
+          <Icon className="w-5 h-5" style={{ color: p.accent }} />
         </div>
-        {index < 2 && (
-          <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border tracking-widest uppercase"
-            style={{ borderColor: `${p.accent}30`, color: p.accent, background: `${p.accent}10` }}>
+        {p.featured && (
+          <span
+            className="text-xs font-medium px-3 py-1 rounded-full"
+            style={{ backgroundColor: `${p.accent}14`, color: p.accent }}
+          >
             Featured
           </span>
         )}
       </div>
 
       <div className="flex-1">
-        <h3 className="text-lg font-bold text-white/90 mb-1 leading-snug group-hover:text-white transition-colors">
-          {p.title}
-        </h3>
-        <p className="font-mono text-[11px] mb-3" style={{ color: `${p.accent}99` }}>{p.subtitle}</p>
-        <p className="text-sm text-white/52 leading-relaxed">{p.description}</p>
+        <h3 className="text-lg font-bold text-gray-900 mb-1 leading-snug">{p.title}</h3>
+        <p className="font-mono text-xs text-gray-400 mb-3">{p.subtitle}</p>
+        <p className="text-sm text-gray-600 leading-relaxed">{p.description}</p>
       </div>
 
       <div className="flex flex-wrap gap-2 mt-5">
         {p.tags.map((t) => (
-          <span key={t} className="text-[11px] px-2.5 py-0.5 rounded-lg border"
-            style={{ borderColor: `${p.accent}22`, color: `${p.accent}88`, background: `${p.accent}09` }}>
+          <span
+            key={t}
+            className="text-xs px-3 py-1 rounded-full bg-gray-50 text-gray-600 font-medium"
+          >
             {t}
           </span>
         ))}
@@ -44,26 +52,27 @@ function ProjectCard({ p, index, inView }) {
 }
 
 export default function Projects() {
-  const ref    = useRef(null)
+  const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section id="projects" className="section-padding px-6 sm:px-10 lg:px-16" ref={ref}>
-      <div className="max-w-screen-2xl mx-auto">
+    <section id="projects" className="section-padding px-5 sm:px-8" ref={ref}>
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="mb-14"
+          className="mb-12"
         >
-          <div className="section-label"><div className="section-line" /><span className="section-tag">03. Projects</span></div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">Selected Work</h2>
-          <p className="text-white/35 mt-3 text-base max-w-xl">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Selected Work</h2>
+          <p className="text-gray-500 mt-3 text-base max-w-xl">
             Projects at the intersection of AI research and engineering — built to solve real problems.
           </p>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 gap-6">
-          {PROJECTS.map((p, i) => <ProjectCard key={p.title} p={p} index={i} inView={inView} />)}
+          {PROJECTS.map((p, i) => (
+            <ProjectCard key={p.title} p={p} index={i} inView={inView} />
+          ))}
         </div>
       </div>
     </section>

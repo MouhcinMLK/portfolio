@@ -1,19 +1,17 @@
 import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
+import { PERSONAL } from '../data/portfolioData'
 
 const SOCIALS = [
-  { icon: FiGithub,   href: 'https://github.com/MohcnMalek',              label: 'GitHub' },
-  { icon: FiLinkedin, href: 'https://linkedin.com/in/mouhcine-malek',      label: 'LinkedIn' },
-  { icon: FiMail,     href: 'mailto:mhcnmalek@gmail.com',                  label: 'Email' },
+  { icon: FiGithub,   href: PERSONAL.github,             label: 'GitHub' },
+  { icon: FiLinkedin, href: PERSONAL.linkedin,           label: 'LinkedIn' },
+  { icon: FiMail,     href: `mailto:${PERSONAL.email}`,  label: 'Email' },
 ]
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 border-t border-white/5 py-7 px-4">
+    <footer className="bg-[#f9fafb] border-t border-gray-100 py-8 px-5">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="font-mono text-[11px] text-white/18">
-          <span className="text-cyan-400/50">{'>'}</span>{' '}
-          © 2025 Mouhcine Malek · Built with React & Framer Motion
-        </div>
+        <p className="text-sm text-gray-400">Mouhcine Malek © 2025</p>
 
         <div className="flex items-center gap-5">
           {SOCIALS.map(({ icon: Icon, href, label }) => (
@@ -23,9 +21,9 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="text-white/22 hover:text-cyan-400 transition-colors"
+              className="text-gray-400 hover:text-cyan-600 transition-colors"
             >
-              <Icon className="w-4 h-4" />
+              <Icon className="w-5 h-5" />
             </a>
           ))}
         </div>

@@ -6,27 +6,9 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        dark: {
-          950: '#020209',
-          900: '#05050f',
-          800: '#0a0a18',
-          700: '#0e0e22',
-        },
-      },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Consolas', 'monospace'],
-      },
-      animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
       },
     },
   },
